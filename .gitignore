@@ -1,0 +1,9 @@
+.env
+history.json
+/venv
+/static
+/.vscode
+/main/xkarasb.session
+/main/xkarasb.session-journal
+/main/__pycache__
+/history/__pycache__
