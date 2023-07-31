@@ -10,7 +10,6 @@ async def add_chat(client: Client, msg: Message):
     data["chats"].append(msg.chat.id)
     with open("cfg.json", "w") as f:
         json.dump(data, f)
-    client.handler_manager.update_handlers()
 
 async def remove_chat(client: Client, msg: Message):
     await client.delete_messages(msg.chat.id, msg.id)

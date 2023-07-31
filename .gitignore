@@ -1,5 +1,7 @@
 .env
 history.json
+cfg.json
+startup.bat
 /venv
 /static
 /.vscode
