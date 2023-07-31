@@ -1,6 +1,7 @@
 .env
 history.json
 cfg.json
+app.log
 startup.bat
 /venv
 /static

@@ -1,10 +1,16 @@
-from pyrogram.types import User, Message, Chat
-
+import os
 import json
+
+from pyrogram.types import Message, Chat
+
 
 class HisotryManager:
     def __init__(self, file_name) -> None:
-        self.file = file_name
+        self.file = os.getcwd() + f"\\{file_name}"
+        if not os.path.exists(self.file):
+            with open(self.file, "w") as f:
+                data = { "messages": [], "history": {}, "deleted": [] }
+                json.dump(data, f)
     
     def __get_dict(self) -> dict:
         with open(self.file) as f:
@@ -34,16 +40,16 @@ class HisotryManager:
         return
 
     def add_text_message(self, chat: Chat, msg: Message) -> None:
-        all_data = self.__get_dict()
-        all_data["messages"].append(msg.id)
-        self.__write_dict(all_data)
+        data = self.__get_dict()
+        data["messages"].append(msg.id)
+        self.__write_dict(data)
 
-        chat_data = self.__get_chat(chat)
-        chat_data["messages"].update({msg.id: json.loads(msg.__str__())})
-        self.__write_chat(chat=chat, data=chat_data)
+        data = self.__get_chat(chat)
+        data["messages"].update({msg.id: json.loads(msg.__str__())})
+        self.__write_chat(chat=chat, data=data)
     
     def add_deleted_message(self, msg: Message):
-        all_data = self.__get_dict()
-        all_data["deleted"].append(msg.id)
-        self.__write_dict(all_data)
+        data = self.__get_dict()
+        data["deleted"].append(msg.id)
+        self.__write_dict(data)
         

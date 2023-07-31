@@ -3,7 +3,7 @@ from pyrogram import Client, filters
 from pyrogram.handlers import MessageHandler, DeletedMessagesHandler
 
 import routers
-from main.filters import chats
+from tools.filters import chats
 
 
 class HandlerManager:
@@ -35,3 +35,4 @@ class HandlerManager:
         for handler in self.handlers:
             self.app.remove_handler(*handler)
         self.handlers = []
+
