@@ -1,6 +1,7 @@
 from routers.commands import *
 from routers.on_message import *
 from routers.on_delete import on_delete
+from routers.on_edit import on_edit
 
 class Commands:
     add_chat = add_chat
@@ -19,6 +20,5 @@ class OnMessage:
 class OnDelete:
     delete = on_delete
 
-commands = Commands
-on_message = OnMessage
-on_delete = OnDelete
+class OnEdit:
+    edit = on_edit

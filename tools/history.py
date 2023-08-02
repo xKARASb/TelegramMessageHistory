@@ -1,5 +1,6 @@
 import os
 import json
+import logging
 
 from pyrogram.types import Message, Chat
 
@@ -37,16 +38,21 @@ class HisotryManager:
         all_data["history"][str(chat.id)] = data
         with open(self.file, "w") as f:
             json.dump(all_data, f, ensure_ascii=False)
-        return
 
-    def add_text_message(self, chat: Chat, msg: Message) -> None:
+    def add_message(self, msg: Message) -> None:
         data = self.__get_dict()
         data["messages"].append(msg.id)
         self.__write_dict(data)
 
-        data = self.__get_chat(chat)
-        data["messages"].update({msg.id: json.loads(msg.__str__())})
-        self.__write_chat(chat=chat, data=data)
+        chat_data = self.__get_chat(msg.chat)
+        chat_data["messages"].update({msg.id: json.loads(msg.__str__())})
+        self.__write_chat(chat=msg.chat, data=chat_data)
+    
+    def add_edited_message(self, msg: Message) -> None:
+        data = self.__get_chat(msg.chat)
+        data["messages"][str(msg.id)]["edited"] = data["messages"][str(msg.id)].get("edited", [])
+        data["messages"][str(msg.id)]["edited"].append(json.loads(msg.__str__())) 
+        self.__write_chat(chat=msg.chat, data=data)
     
     def add_deleted_messages(self, msgs: list[Message]):
         data = self.__get_dict()
@@ -57,3 +63,4 @@ class HisotryManager:
     
     def get_deleted_messages(self) -> list[Message]:
         return self.__get_dict()["deleted"]
+    

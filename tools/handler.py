@@ -1,6 +1,6 @@
 from pyrogram import Client, filters
 
-from pyrogram.handlers import MessageHandler, DeletedMessagesHandler
+from pyrogram.handlers import MessageHandler, DeletedMessagesHandler, EditedMessageHandler
 
 import routers
 from tools.filters import chats
@@ -26,6 +26,8 @@ class HandlerManager:
             MessageHandler(routers.OnMessage.video, (filters.video & chats)),
             MessageHandler(routers.OnMessage.voice, (filters.voice & chats)), 
 
+            EditedMessageHandler(routers.OnEdit.edit, chats),
+            
             DeletedMessagesHandler(routers.OnDelete.delete),
             )
         
@@ -35,4 +37,3 @@ class HandlerManager:
         for handler in self.handlers:
             self.app.remove_handler(*handler)
         self.handlers = []
-

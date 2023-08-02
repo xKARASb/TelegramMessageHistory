@@ -1,6 +1,8 @@
+import logging
 from pyrogram import Client
 from pyrogram.types import Message
 
+from tools import histoty_manager
 
 async def on_edit(client: Client, msg: Message):
-    pass
+    histoty_manager.add_edited_message(msg)
