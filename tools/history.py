@@ -48,8 +48,12 @@ class HisotryManager:
         data["messages"].update({msg.id: json.loads(msg.__str__())})
         self.__write_chat(chat=chat, data=data)
     
-    def add_deleted_message(self, msg: Message):
+    def add_deleted_messages(self, msgs: list[Message]):
         data = self.__get_dict()
-        data["deleted"].append(msg.id)
+        for msg in msgs:
+            if msg.id in data["messages"]:
+                data["deleted"].append(msg.id)
         self.__write_dict(data)
-        
+    
+    def get_deleted_messages(self) -> list[Message]:
+        return self.__get_dict()["deleted"]

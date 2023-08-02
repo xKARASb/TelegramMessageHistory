@@ -9,7 +9,7 @@ startup.bat
 /main/xkarasb.session
 /main/xkarasb.session-journal
 /main/__pycache__
-/history/__pycache__
+/tools/__pycache__
 /routers/__pycache__
 xkarasb.session
 xkarasb.session-journal
