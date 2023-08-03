@@ -5,7 +5,7 @@ from pyrogram.types import Message
 
 from tools import histoty_manager
 
-path = os.getcwd() + '/static'
+path = os.path.join(os.getcwd(), "static")
 
 async def on_text_message(client, msg: Message):
     histoty_manager.add_message(msg)

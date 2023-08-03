@@ -1,6 +1,5 @@
 import os
 import json
-import logging
 
 from pyrogram.types import Message, Chat
 
@@ -54,7 +53,7 @@ class HisotryManager:
         data["messages"][str(msg.id)]["edited"].append(json.loads(msg.__str__())) 
         self.__write_chat(chat=msg.chat, data=data)
     
-    def add_deleted_messages(self, msgs: list[Message]):
+    def add_deleted_messages(self, msgs: list[Message]) -> None:
         data = self.__get_dict()
         for msg in msgs:
             if msg.id in data["messages"]:

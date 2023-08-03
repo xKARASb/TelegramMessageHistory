@@ -6,6 +6,10 @@ from routers.on_edit import on_edit
 class Commands:
     add_chat = add_chat
     remove_chat = remove_chat
+    system_chat = set_system_chat
+    chats = get_chats
+    change_settings = change_settings
+    chat = get_chat
 
 class OnMessage:
     text_message = on_text_message

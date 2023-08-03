@@ -11,5 +11,6 @@ startup.bat
 /main/__pycache__
 /tools/__pycache__
 /routers/__pycache__
+/chats
 xkarasb.session
 xkarasb.session-journal
